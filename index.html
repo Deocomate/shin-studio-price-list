@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Giá Dịch Vụ - Shin Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* CSS Reset and Basic Setup */
+        :root {
+            --primary-font: 'Playfair Display', serif;
+            --text-color: #333;
+            --border-color: #e5e5e5;
+            --background-color: #fff;
+            --container-bg-color: #fdfdfd;
+            --accent-color: #8c7851;
+            /* Màu vàng đồng sang trọng */
+            --special-offer-bg: #f9f6f3;
+            --highlight-red: #d9534f;
+            /* Màu đỏ nổi bật */
+        }
+
+        body {
+            font-family: var(--primary-font);
+            background-color: #f4f4f4;
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Nút chụp ảnh */
+        .capture-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--primary-font);
+            font-size: 15px;
+            z-index: 1000;
+            /* Đảm bảo nút luôn nổi lên trên */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transition: opacity 0.2s;
+        }
+
+        .capture-button:hover {
+            opacity: 0.9;
+        }
+
+        /* Price List Container */
+        .price-list-container {
+            background-color: var(--container-bg-color);
+            width: 100%;
+            max-width: 800px;
+            padding: 50px 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header .studio-name {
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 5px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        /* Special Offer Section */
+        .special-offer {
+            background-color: var(--special-offer-bg);
+            border: 1px dashed var(--accent-color);
+            padding: 30px;
+            margin-bottom: 50px;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .special-offer-title {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        .special-offer-price {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0 0 15px 0;
+            color: #000;
+        }
+
+        /* LỚP MỚI: Để làm nổi bật giá */
+        .highlight-price {
+            font-weight: 900;
+            /* Đậm hơn */
+            color: var(--highlight-red);
+        }
+
+        .special-offer-details {
+            font-size: 16px;
+            letter-spacing: 1px;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* General Sections */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Items within sections */
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid #f0f0f0;
+            /* THAY ĐỔI: Tăng cỡ chữ */
+            font-size: 19px;
+            letter-spacing: 1px;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: 600;
+        }
+
+        .item-price {
+            font-weight: 600;
+            text-align: right;
+            color: #000;
+        }
+
+        .item-note {
+            font-size: 15px;
+            /* Tăng nhẹ */
+            color: #777;
+            margin-left: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .price-list-container {
+                padding: 40px 25px;
+            }
+
+            .header .studio-name {
+                font-size: 32px;
+            }
+
+            .item {
+                /* THAY ĐỔI: Tăng cỡ chữ cho mobile */
+                font-size: 17px;
+            }
+
+            .special-offer-price {
+                font-size: 30px;
+            }
+
+            .capture-button {
+                font-size: 13px;
+                padding: 8px 12px;
+                top: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button id="capture-btn" class="capture-button">Chụp ảnh bảng giá</button>
+
+    <div class="price-list-container">
+
+        <header class="header">
+            <h1 class="studio-name">Shin Studio</h1>
+        </header>
+
+        <div class="special-offer">
+            <h2 class="special-offer-title">Ưu Đãi Đặc Biệt Make + Chụp</h2>
+            <p class="special-offer-price">Chỉ Với <span class="highlight-price">599k</span> / Concept</p>
+            <p class="special-offer-details">(Áp dụng với tất cả concept)</p>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">Dịch Vụ Make Up</h3>
+            <div class="item">
+                <span class="item-name">Make up tiệc</span>
+                <span class="item-price">299.000 VNĐ</span>
+            </div>
+            <div class="item">
+                <span class="item-name">Make up cô dâu</span>
+                <span class="item-price">699.000 VNĐ</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">Dịch Vụ Chụp Ảnh</h3>
+            <div class="item">
+                <span class="item-name">Chụp tốt nghiệp</span>
+                <span class="item-price">399.000 VNĐ</span>
+            </div>
+            <div class="item">
+                <span class="item-name">Chụp kỷ yếu nửa ngày</span>
+                <span class="item-price">499.000 VNĐ</span>
+            </div>
+            <div class="item">
+                <span class="item-name">Chụp kỷ yếu cả ngày</span>
+                <span class="item-price">799.000 VNĐ</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">Các Khoá Học</h3>
+            <div class="item">
+                <span class="item-name">Dạy makeup</span>
+                <div>
+                    <span class="item-price">1.000.000 VNĐ</span>
+                    <span class="item-note">/ 10 buổi</span>
+                </div>
+            </div>
+            <div class="item">
+                <span class="item-name">Dạy chụp ảnh cơ bản</span>
+                <div>
+                    <span class="item-price">750.000 VNĐ</span>
+                    <span class="item-note">/ 5 buổi</span>
+                </div>
+            </div>
+            <div class="item">
+                <span class="item-name">Dạy dùng lightroom cơ bản</span>
+                <div>
+                    <span class="item-price">200.000 VNĐ</span>
+                    <span class="item-note">/ buổi</span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Cảm ơn quý khách đã tin tưởng và lựa chọn Shin Studio!</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.getElementById('capture-btn').addEventListener('click', function () {
+            const priceListElement = document.querySelector('.price-list-container');
+
+            // Tạm thời ẩn nút chụp ảnh đi để không xuất hiện trong ảnh
+            const captureButton = this;
+            captureButton.style.display = 'none';
+
+            html2canvas(priceListElement, {
+                scale: 2, // Chụp ảnh với độ phân giải gấp đôi để sắc nét hơn
+                useCORS: true,
+                backgroundColor: null // Dùng background của body
+            }).then(canvas => {
+                // Tạo một link ẩn để tải ảnh về
+                const link = document.createElement('a');
+                link.download = 'bang-gia-shin-studio.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                // Hiện lại nút chụp ảnh sau khi đã chụp xong
+                captureButton.style.display = 'block';
+            }).catch(err => {
+                console.error("Oops, something went wrong!", err);
+                // Đảm bảo nút được hiện lại kể cả khi có lỗi
+                captureButton.style.display = 'block';
+            });
+        });
+    </script>
+
+</body>
+
+</html>
