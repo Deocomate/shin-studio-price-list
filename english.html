@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Price List - Shin Studio</title>
+
+    <meta property="og:title" content="Service Price List - Shin Studio">
+    <meta property="og:description"
+        content="Detailed price list for makeup, photography, and courses at Shin Studio. Discover special offers now!">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./head.png">
+    <meta property="og:site_name" content="Shin Studio">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* CSS Reset and Basic Setup */
+        :root {
+            --primary-font: 'Playfair Display', serif;
+            --text-color: #333;
+            --border-color: #e5e5e5;
+            --background-color: #fff;
+            --container-bg-color: #fdfdfd;
+            --accent-color: #8c7851;
+            /* Luxurious bronze gold color */
+            --special-offer-bg: #f9f6f3;
+            --highlight-red: #d9534f;
+            /* Highlight red color */
+        }
+
+        body {
+            font-family: var(--primary-font);
+            background-color: #f4f4f4;
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Capture Button */
+        .capture-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--primary-font);
+            font-size: 15px;
+            z-index: 1000;
+            /* Ensure the button is always on top */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transition: opacity 0.2s;
+        }
+
+        .capture-button:hover {
+            opacity: 0.9;
+        }
+
+        /* Price List Container */
+        .price-list-container {
+            background-color: var(--container-bg-color);
+            width: 100%;
+            max-width: 800px;
+            padding: 50px 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header .studio-name {
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 5px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        /* Special Offer Section */
+        .special-offer {
+            background-color: var(--special-offer-bg);
+            border: 1px dashed var(--accent-color);
+            padding: 30px;
+            margin-bottom: 50px;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .special-offer-title {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        .special-offer-price {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0 0 15px 0;
+            color: #000;
+        }
+
+        /* NEW CLASS: To highlight the price */
+        .highlight-price {
+            font-weight: 900;
+            /* Bolder */
+            color: var(--highlight-red);
+        }
+
+        .special-offer-details {
+            font-size: 16px;
+            letter-spacing: 1px;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* General Sections */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Items within sections */
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 19px;
+            letter-spacing: 1px;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: 600;
+        }
+
+        .item-price {
+            font-weight: 600;
+            text-align: right;
+            color: #000;
+        }
+
+        .item-note {
+            font-size: 15px;
+            color: #777;
+            margin-left: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .price-list-container {
+                padding: 40px 25px;
+            }
+
+            .header .studio-name {
+                font-size: 32px;
+            }
+
+            .item {
+                font-size: 17px;
+            }
+
+            .special-offer-price {
+                font-size: 30px;
+            }
+
+            .capture-button {
+                font-size: 13px;
+                padding: 8px 12px;
+                top: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button id="capture-btn" class="capture-button">Capture Price List</button>
+
+    <div class="price-list-container">
+
+        <header class="header">
+            <h1 class="studio-name">Shin Studio</h1>
+        </header>
+
+        <div class="special-offer">
+            <h2 class="special-offer-title">Special Offer: Makeup + Photoshoot</h2>
+            <p class="special-offer-price">Only <span class="highlight-price">599k</span> / Concept</p>
+            <p class="special-offer-details">(Applicable to all concepts)</p>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">Makeup Services</h3>
+            <div class="item">
+                <span class="item-name">Party Makeup</span>
+                <span class="item-price">299,000 VND</span>
+            </div>
+            <div class="item">
+                <span class="item-name">Bridal Makeup</span>
+                <span class="item-price">699,000 VND</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">Photography Services</h3>
+            <div class="item">
+                <span class="item-name">Graduation Photoshoot</span>
+                <span class="item-price">399,000 VND</span>
+            </div>
+            <div class="item">
+                <span class="item-name">Half-day Yearbook Photoshoot</span>
+                <span class="item-price">499,000 VND</span>
+            </div>
+            <div class="item">
+                <span class="item-name">Full-day Yearbook Photoshoot</span>
+                <span class="item-price">799,000 VND</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">Courses</h3>
+            <div class="item">
+                <span class="item-name">Makeup Class</span>
+                <div>
+                    <span class="item-price">1,000,000 VND</span>
+                    <span class="item-note">/ 10 sessions</span>
+                </div>
+            </div>
+            <div class="item">
+                <span class="item-name">Basic Photography Class</span>
+                <div>
+                    <span class="item-price">750,000 VND</span>
+                    <span class="item-note">/ 5 sessions</span>
+                </div>
+            </div>
+            <div class="item">
+                <span class="item-name">Basic Lightroom Class</span>
+                <div>
+                    <span class="item-price">200,000 VND</span>
+                    <span class="item-note">/ session</span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Thank you for trusting and choosing Shin Studio!</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.getElementById('capture-btn').addEventListener('click', function () {
+            const priceListElement = document.querySelector('.price-list-container');
+
+            const captureButton = this;
+            captureButton.style.display = 'none';
+
+            html2canvas(priceListElement, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'shin-studio-price-list.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                captureButton.style.display = 'block';
+            }).catch(err => {
+                console.error("Oops, something went wrong!", err);
+                captureButton.style.display = 'block';
+            });
+        });
+    </script>
+
+</body>
+
+</html>
