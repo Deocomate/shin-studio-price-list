@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bảng Giá Dịch Vụ - Shin Studio</title>
+
+    <meta property="og:title" content="Bảng Giá Dịch Vụ - Shin Studio">
+    <meta property="og:description"
+        content="Bảng giá chi tiết các dịch vụ makeup, chụp ảnh và khoá học tại Shin Studio. Khám phá ngay ưu đãi đặc biệt!">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./head.png">
+    <meta property="og:site_name" content="Shin Studio">
+
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&display=swap"
@@ -149,7 +158,6 @@
             align-items: center;
             padding: 18px 0;
             border-bottom: 1px solid #f0f0f0;
-            /* THAY ĐỔI: Tăng cỡ chữ */
             font-size: 19px;
             letter-spacing: 1px;
         }
@@ -170,7 +178,6 @@
 
         .item-note {
             font-size: 15px;
-            /* Tăng nhẹ */
             color: #777;
             margin-left: 15px;
         }
@@ -195,7 +202,6 @@
             }
 
             .item {
-                /* THAY ĐỔI: Tăng cỡ chữ cho mobile */
                 font-size: 17px;
             }
 
@@ -291,26 +297,22 @@
         document.getElementById('capture-btn').addEventListener('click', function () {
             const priceListElement = document.querySelector('.price-list-container');
 
-            // Tạm thời ẩn nút chụp ảnh đi để không xuất hiện trong ảnh
             const captureButton = this;
             captureButton.style.display = 'none';
 
             html2canvas(priceListElement, {
-                scale: 2, // Chụp ảnh với độ phân giải gấp đôi để sắc nét hơn
+                scale: 2,
                 useCORS: true,
-                backgroundColor: null // Dùng background của body
+                backgroundColor: null
             }).then(canvas => {
-                // Tạo một link ẩn để tải ảnh về
                 const link = document.createElement('a');
                 link.download = 'bang-gia-shin-studio.png';
                 link.href = canvas.toDataURL('image/png');
                 link.click();
 
-                // Hiện lại nút chụp ảnh sau khi đã chụp xong
                 captureButton.style.display = 'block';
             }).catch(err => {
                 console.error("Oops, something went wrong!", err);
-                // Đảm bảo nút được hiện lại kể cả khi có lỗi
                 captureButton.style.display = 'block';
             });
         });
